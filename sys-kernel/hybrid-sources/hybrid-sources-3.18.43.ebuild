@@ -10,7 +10,7 @@ inherit kernel-2
 detect_version
 detect_arch
 
-MPTCP_FILE="mptcp-v3.18.34-8cade5ab7240.patch"
+MPTCP_FILE="mptcp-v3.18.43-cb665bc00f1c.patch"
 
 KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ia64 ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86"
 HOMEPAGE="http://multipath-tcp.org/patches/ http://dev.gentoo.org/~mpagano/genpatches http://multipath-tcp.org"
