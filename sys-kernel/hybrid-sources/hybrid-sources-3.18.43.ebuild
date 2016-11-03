@@ -24,6 +24,13 @@ SRC_URI="${KERNEL_URI} ${GENPATCHES_URI} ${ARCH_URI}
 src_prepare() {
 	if [ ! -d "$WORKDIR/net/mptcp" ]; then
 		use mptcp && epatch "${DISTDIR}/${MPTCP_FILE}"
+                ver=${MPTCP_FILE//\.patch/}
+                version=${ver//mptcp-/}
+                versionstring=`cat net/mptcp/mptcp_ctrl.c | grep pr_info  | grep "release" | tr -d 'pr_info(' | tr -d '");' | xargs`
+                versionstring="$versionstring ($version)"
+
+                einfo "changing version info to ${versionstring}"
+                sed -i.bak -e "s/pr_info(\"MPTCP:.* release .*\");/pr_info(\"${versionstring}\");/g" net/mptcp/mptcp_ctrl.c || ewarn "warn: version change failed"
 	else
 		einfo "MPTCP seems to be included, skipping patch"
 	fi
