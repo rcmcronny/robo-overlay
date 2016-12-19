@@ -4,7 +4,7 @@
 EAPI="5"
 ETYPE="sources"
 K_WANT_GENPATCHES="base extras experimental"
-K_GENPATCHES_VER="42"
+K_GENPATCHES_VER="45"
 K_DEBLOB_AVAILABLE="0"
 inherit kernel-2
 detect_version
@@ -26,9 +26,8 @@ src_prepare() {
 		use mptcp && epatch "${DISTDIR}/${MPTCP_FILE}"
                 ver=${MPTCP_FILE//\.patch/}
                 version=${ver//mptcp-/}
-                versionstring=`cat net/mptcp/mptcp_ctrl.c | grep pr_info  | grep "release" | tr -d 'pr_info(' | tr -d '");' | xargs`
+                versionstring=`cat net/mptcp/mptcp_ctrl.c | grep pr_info  | grep "release" | sed -e 's/pr_info(//g' | sed -e 's/);//g' | sed -e 's/"//g' | awk '{gsub(/^ +| +$/,"")} {print $0}' | xargs`
                 versionstring="$versionstring ($version)"
-
                 einfo "changing version info to ${versionstring}"
                 sed -i.bak -e "s/pr_info(\"MPTCP:.* release .*\");/pr_info(\"${versionstring}\");/g" net/mptcp/mptcp_ctrl.c || ewarn "warn: version change failed"
 	else
