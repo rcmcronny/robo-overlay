@@ -4,14 +4,13 @@
 EAPI="5"
 ETYPE="sources"
 K_WANT_GENPATCHES="base extras experimental"
-K_GENPATCHES_VER="46"
+K_GENPATCHES_VER="50"
 K_DEBLOB_AVAILABLE="0"
-
 inherit kernel-2
 detect_version
 detect_arch
 
-MPTCP_FILE="mptcp-v4.1.38-d77a2b41654e.patch"
+MPTCP_FILE="mptcp-v4.1.39-dd81a2e876fb.patch"
 
 KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ia64 ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86"
 HOMEPAGE="http://multipath-tcp.org/patches/ http://dev.gentoo.org/~mpagano/genpatches http://multipath-tcp.org"
@@ -23,14 +22,12 @@ SRC_URI="${KERNEL_URI} ${GENPATCHES_URI} ${ARCH_URI}
 	http://boesger.de/mptcp/${MPTCP_FILE}
 "
 src_prepare() {
-        if [ ! -d "$WORKDIR/net/mptcp" ]; then
-                use mptcp && epatch "${DISTDIR}/${MPTCP_FILE}"
-                ver=${MPTCP_FILE//\.patch/}
-                version=${ver//mptcp-/}
-                versionstring=`cat net/mptcp/mptcp_ctrl.c | grep pr_info  | grep "release" | sed -e 's/pr_info(//g' | sed -e 's/);//g' | sed -e 's/"//g' | awk '{gsub(/^ +| +$/,"")} {print $0}' | xargs`
-                versionstring="$versionstring ($version)"
-                einfo "changing version info to ${versionstring}"
-                sed -i.bak -e "s/pr_info(\"MPTCP:.* release .*\");/pr_info(\"${versionstring}\");/g" net/mptcp/mptcp_ctrl.c || ewarn "warn: version change failed"
+	if [ ! -d "$WORKDIR/net/mptcp" ]; then
+		use mptcp && epatch "${DISTDIR}/${MPTCP_FILE}"
+		ver=${MPTCP_FILE//\.patch/}
+		version=${ver//mptcp-/}
+		einfo "changing version info to ${version}"
+		sed -i.bak -e "s/pr_info(\"MPTCP:.* release .*\");/pr_info(\"MPTCP: ${version}\");/g" net/mptcp/mptcp_ctrl.c || ewarn "warn: version change failed"
 	else
 		einfo "MPTCP seems to be included, skipping patch"
 	fi
