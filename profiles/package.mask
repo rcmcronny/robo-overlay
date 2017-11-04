@@ -1,0 +1,4 @@
+# 4.9 is stable from mptcp pov
+# all above may cause issues when applying patches
+>sys-kernel/hybrid-sources-4.9
+
