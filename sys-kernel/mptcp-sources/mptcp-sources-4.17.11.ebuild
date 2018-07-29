@@ -4,13 +4,13 @@
 EAPI="5"
 ETYPE="sources"
 K_WANT_GENPATCHES="base extras experimental"
-K_GENPATCHES_VER="10"
+K_GENPATCHES_VER="12"
 K_DEBLOB_AVAILABLE="0"
 inherit kernel-2
 detect_version
 detect_arch
 
-MPTCP_FILE="mptcp-v4.17-8b0539712707.patch"
+MPTCP_FILE="mptcp-v4.17-ccd0390729e3.patch"
 
 KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ia64 ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86"
 HOMEPAGE="http://multipath-tcp.org/patches/ http://dev.gentoo.org/~mpagano/genpatches http://multipath-tcp.org"
