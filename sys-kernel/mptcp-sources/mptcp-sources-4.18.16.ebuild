@@ -4,22 +4,21 @@
 EAPI="5"
 ETYPE="sources"
 K_WANT_GENPATCHES="base extras experimental"
-K_GENPATCHES_VER="16"
+K_GENPATCHES_VER="19"
 K_DEBLOB_AVAILABLE="0"
 inherit kernel-2
 detect_version
 detect_arch
 
-MPTCP_FILE="mptcp-v4.16-92a6e05825aa.patch"
+MPTCP_FILE="mptcp-v4.18-4b41ddb989ae.patch"
 
 KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ia64 ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86"
 HOMEPAGE="http://multipath-tcp.org/patches/ http://dev.gentoo.org/~mpagano/genpatches http://multipath-tcp.org"
 IUSE="deblob experimental +mptcp"
 
-DESCRIPTION="Hybrid sources including the Gentoo patchset, Multipath support for the ${KV_MAJOR}.${KV_MINOR} kernel tree"
+DESCRIPTION="MultiPath-TCP sources including the Gentoo patchset, Multipath support for the ${KV_MAJOR}.${KV_MINOR} kernel tree"
 SRC_URI="${KERNEL_URI} ${GENPATCHES_URI} ${ARCH_URI}
 	http://multipath-tcp.org/patches/${MPTCP_FILE}
-	http://boesger.de/mptcp/${MPTCP_FILE}
 "
 src_prepare() {
 	if [ ! -d "$WORKDIR/net/mptcp" ]; then
