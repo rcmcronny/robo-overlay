@@ -1,3 +1,4 @@
-# 5.1.16 is stable, go
-#=sys-kernel/hybrid-sources-5.1.16
+# 5.1.x is stable, go
+# 5.2.x does not work yet (so mask it)
+>sys-kernel/hybrid-sources-5.1
 
