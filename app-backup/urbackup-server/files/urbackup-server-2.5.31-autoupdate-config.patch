@@ -1,0 +1,13 @@
+--- urbackup-server-2.5.25/urbackupserver/server_settings.cpp	2022-08-20 17:59:24.000000000 +0200
++++ urbackup-server-2.5.25/urbackupserver/server_settings.cpp1	2022-08-29 20:38:14.738711614 +0200
+@@ -315,8 +315,8 @@
+ 		settings->backupfolder = trim(settings_global->getValue("backupfolder", DEFAULT_BACKUP_FOLDER));
+ 		settings->backupfolder_uncompr = trim(settings_global->getValue("backupfolder_uncompr", settings->backupfolder));
+ 		settings->autoshutdown = (settings_global->getValue("autoshutdown", "false") == "true");;
+-		settings->download_client = (settings_global->getValue("download_client", "true") == "true");
+-		settings->autoupdate_clients = (settings_global->getValue("autoupdate_clients", "true") == "true");
++		settings->download_client = (settings_global->getValue("download_client", "false") == "true");
++		settings->autoupdate_clients = (settings_global->getValue("autoupdate_clients", "false") == "true");
+ 		settings->max_active_clients = settings_global->getValue("max_active_clients", 10000);
+ 		settings->max_sim_backups = settings_global->getValue("max_sim_backups", 100);
+ 		settings->cleanup_window = settings_global->getValue("cleanup_window", "1-7/3-4");
